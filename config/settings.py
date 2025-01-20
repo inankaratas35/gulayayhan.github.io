@@ -2,6 +2,8 @@ import os
 
 from pathlib import Path
 
+import dj_database_url
+
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -16,7 +18,7 @@ DEBUG = 'RENDER' not in os.environ
 
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']  # Geliştirme aşamasında tüm hostlara izin veriyoruz
 
 
 
@@ -57,6 +59,8 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
 
     'django.middleware.security.SecurityMiddleware',
+
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # Whitenoise middleware
 
     'django.contrib.sessions.middleware.SessionMiddleware',
 
@@ -116,13 +120,13 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
 
-    'default': {
+    'default': dj_database_url.config(
 
-        'ENGINE': 'django.db.backends.sqlite3',
+        default='sqlite:///db.sqlite3',
 
-        'NAME': BASE_DIR / 'db.sqlite3',
+        conn_max_age=600
 
-    }
+    )
 
 }
 
@@ -174,13 +178,15 @@ USE_TZ = True
 
 
 
-# Static files
+# Static files (CSS, JavaScript, Images)
 
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 
@@ -192,7 +198,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 
-# Disable HTTPS settings for now
+# Security settings - Disabled for development
 
 SECURE_SSL_REDIRECT = False
 
@@ -224,7 +230,7 @@ CKEDITOR_CONFIGS = {
 
         'height': 300,
 
-        'width': '99%',
+        'width': '100%',
 
     },
 
