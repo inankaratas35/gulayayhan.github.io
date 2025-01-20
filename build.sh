@@ -3,6 +3,11 @@
 # Exit on error
 set -o errexit
 
+
+# Install system dependencies
+apt-get update && apt-get install -y python3-dev
+
+
 # Upgrade pip and install Python packages
 python -m pip install --upgrade pip
 pip install virtualenv
@@ -11,7 +16,7 @@ source venv/bin/activate
 
 # Install requirements
 pip install -r requirements.txt
-pip install gunicorn
+pip install gunicorn Pillow
 
 # Collect static files
 python manage.py collectstatic --noinput
