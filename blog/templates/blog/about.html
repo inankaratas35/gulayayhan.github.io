@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+
+
+{% block title %}Hakkımda - Chef Gülay Ayhan{% endblock %}
+
+
+
+{% block content %}
+
+<div class="hero-section" style="background-image: url('/static/images/about-bg.jpeg');">
+
+    <div class="container">
+
+        <div class="row justify-content-center">
+
+            <div class="col-md-8">
+
+                <div class="card p-4">
+
+                    <div class="text-center mb-4">
+
+                        <img src="{{ about.image.url }}" class="rounded-circle" style="width: 200px; height: 200px; object-fit: cover;" alt="{{ about.title }}">
+
+                    </div>
+
+                    <h1 class="text-center mb-4">{{ about.title }}</h1>
+
+                    <div class="about-content">
+
+                        {{ about.content|safe }}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %} 

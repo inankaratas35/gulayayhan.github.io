@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+
+
+{% block title %}Ana Sayfa - Chef Gülay Ayhan{% endblock %}
+
+
+
+{% block content %}
+
+<section class="hero-section" style="background-image: url('/static/images/hero1.jpeg');">
+
+    <div class="hero-content">
+
+        <h1 class="hero-title">Mutfağın Büyülü Dünyasına Hoş Geldiniz</h1>
+
+        <p class="hero-subtitle">Lezzetli tarifler ve özel püf noktalarıyla mutfak yolculuğunuza eşlik ediyorum</p>
+
+    </div>
+
+</section>
+
+
+
+<section class="hero-section" style="background-image: url('/static/images/hero2.jpeg');">
+
+    <div class="hero-content">
+
+        <h1 class="hero-title">Geleneksel Lezzetler</h1>
+
+        <p class="hero-subtitle">Nesilden nesile aktarılan tarifleri modern dokunuşlarla yeniden yorumluyorum</p>
+
+    </div>
+
+</section>
+
+
+
+<section class="hero-section" style="background-image: url('/static/images/hero3.jpeg');">
+
+    <div class="hero-content">
+
+        <h1 class="hero-title">Özel Tarifler</h1>
+
+        <p class="hero-subtitle">Her damak tadına uygun, özenle hazırlanmış tarifler</p>
+
+    </div>
+
+</section>
+
+
+
+<div class="content-section">
+
+    <div class="container">
+
+        <div class="row">
+
+            {% for recipe in recipes %}
+
+            <div class="col-md-4 mb-4">
+
+                <div class="card">
+
+                    <img src="{{ recipe.image.url }}" class="card-img-top" alt="{{ recipe.title }}">
+
+                    <div class="card-body">
+
+                        <h5 class="card-title">{{ recipe.title }}</h5>
+
+                        <p class="card-text">{{ recipe.description }}</p>
+
+                        <a href="{% url 'recipe-detail' recipe.pk %}" class="btn btn-primary">Tarifi Gör</a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %} 
